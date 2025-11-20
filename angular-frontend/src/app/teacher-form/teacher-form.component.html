@@ -1,0 +1,76 @@
+<div class="form-container">
+  <h2>{{ isEditing ? 'Edit Teacher' : 'Add New Teacher' }}</h2>
+  
+  <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input 
+        type="text" 
+        id="firstName" 
+        formControlName="firstName"
+        [class.error]="teacherForm.get('firstName')?.invalid && teacherForm.get('firstName')?.touched">
+      <div class="error-message" *ngIf="teacherForm.get('firstName')?.invalid && teacherForm.get('firstName')?.touched">
+        First name is required
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input 
+        type="text" 
+        id="lastName" 
+        formControlName="lastName"
+        [class.error]="teacherForm.get('lastName')?.invalid && teacherForm.get('lastName')?.touched">
+      <div class="error-message" *ngIf="teacherForm.get('lastName')?.invalid && teacherForm.get('lastName')?.touched">
+        Last name is required
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email"
+        [class.error]="teacherForm.get('email')?.invalid && teacherForm.get('email')?.touched">
+      <div class="error-message" *ngIf="teacherForm.get('email')?.invalid && teacherForm.get('email')?.touched">
+        <span *ngIf="teacherForm.get('email')?.errors?.['required']">Email is required</span>
+        <span *ngIf="teacherForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="subject">Subject:</label>
+      <input 
+        type="text" 
+        id="subject" 
+        formControlName="subject"
+        [class.error]="teacherForm.get('subject')?.invalid && teacherForm.get('subject')?.touched">
+      <div class="error-message" *ngIf="teacherForm.get('subject')?.invalid && teacherForm.get('subject')?.touched">
+        Subject is required
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="yearsOfExperience">Years of Experience:</label>
+      <input 
+        type="number" 
+        id="yearsOfExperience" 
+        formControlName="yearsOfExperience"
+        [class.error]="teacherForm.get('yearsOfExperience')?.invalid && teacherForm.get('yearsOfExperience')?.touched">
+      <div class="error-message" *ngIf="teacherForm.get('yearsOfExperience')?.invalid && teacherForm.get('yearsOfExperience')?.touched">
+        <span *ngIf="teacherForm.get('yearsOfExperience')?.errors?.['required']">Years of experience is required</span>
+        <span *ngIf="teacherForm.get('yearsOfExperience')?.errors?.['min']">Years of experience must be 0 or greater</span>
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" [disabled]="teacherForm.invalid">
+        {{ isEditing ? 'Update Teacher' : 'Add Teacher' }}
+      </button>
+      <button type="button" (click)="resetForm()" *ngIf="isEditing">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

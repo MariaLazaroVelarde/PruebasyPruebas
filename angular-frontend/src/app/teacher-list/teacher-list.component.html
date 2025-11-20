@@ -1,0 +1,47 @@
+<div class="teachers-container">
+  <h2>Teachers List</h2>
+  
+  <div class="loading" *ngIf="loading">
+    Loading teachers...
+  </div>
+  
+  <button class="refresh-button" (click)="loadTeachers()" [disabled]="loading">
+    Refresh Teachers
+  </button>
+  
+  <table *ngIf="!loading && teachers.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Experience</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let teacher of teachers">
+        <td>{{ teacher.id }}</td>
+        <td>{{ teacher.firstName }} {{ teacher.lastName }}</td>
+        <td>{{ teacher.email }}</td>
+        <td>{{ teacher.subject }}</td>
+        <td>{{ teacher.yearsOfExperience }}</td>
+        <td>
+          <button class="edit-button" 
+                  (click)="onEditTeacher(teacher)">
+            Edit
+          </button>
+          <button class="delete-button" 
+                  (click)="deleteTeacher(teacher.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="no-teachers" *ngIf="!loading && teachers.length === 0">
+    No teachers found.
+  </div>
+</div>

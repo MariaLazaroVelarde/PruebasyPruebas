@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>Teacher Management System</h1>
+  
+  <app-teacher-form (teacherSaved)="onTeacherSaved()"></app-teacher-form>
+  
+  <app-teacher-list (editTeacher)="onEditTeacher($any($event))"></app-teacher-list>
+</div>
